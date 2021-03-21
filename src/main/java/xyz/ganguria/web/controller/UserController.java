@@ -1,5 +1,7 @@
 package xyz.ganguria.web.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import xyz.ganguria.web.entity.User;
 import xyz.ganguria.web.repository.UserRepository;
@@ -9,6 +11,7 @@ public class UserController {
 
     private final UserRepository userRepository;
 
+    @Autowired
     public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
