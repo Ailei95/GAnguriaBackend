@@ -11,15 +11,16 @@ import org.springframework.stereotype.Controller;
 import xyz.ganguria.socket.model.Message;
 
 import java.security.Principal;
+import java.sql.Timestamp;
 
 
 @Controller
-public class WebSocketController {
+public class WebSocketBrokerController {
 
     private final SimpMessagingTemplate template;
 
     @Autowired
-    WebSocketController(SimpMessagingTemplate template){
+    WebSocketBrokerController(SimpMessagingTemplate template){
         this.template = template;
     }
 
@@ -33,7 +34,9 @@ public class WebSocketController {
 
     @MessageMapping("/send/message")
     @SendTo("/api/message")
-    public String sendMessage(String message){
-        return message;
+    public Message sendMessage(Message message){
+        Message msg = message;
+        msg.setTimestamp(new Timestamp(System.currentTimeMillis()).getTime());
+        return msg;
     }
 }
